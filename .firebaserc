@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "scheduler-authentication": {
+      "hosting": {
+        "firebase-user-authentication": [
+          "scheduler-authentication"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "scheduler-authentication"
+  }
+}
