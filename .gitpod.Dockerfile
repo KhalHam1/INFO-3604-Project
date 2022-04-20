@@ -1,7 +1,4 @@
-ui:
-    image: cypress/base:latest
-    # if targeting a specific node version, use e.g.
-    # image: cypress/base:14
+FROM cypress/base
 
 
 RUN npm i -g firebase-tools
