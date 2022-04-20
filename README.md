@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.0-next.1.
 
-# Gitpod for main branch [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://github.com/Jehazekel/INFO-3604-Project-Testing)
+# Gitpod for main branch [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/Jehazekel/INFO-3604-Project-Testing)
 for new branch, add "/tree/branchName"
 
 
