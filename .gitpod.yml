@@ -1,4 +1,3 @@
-ui:
-    image: cypress/base:latest
-    # if targeting a specific node version, use e.g.
-    # image: cypress/base:14
+image: cypress/base:latest
+# if targeting a specific node version, use e.g.
+# image: cypress/base:14
