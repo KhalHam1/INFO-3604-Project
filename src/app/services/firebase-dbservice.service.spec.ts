@@ -15,6 +15,6 @@ describe('FirebaseDBServiceService', () => {
 
   it('should be created', () => {
     //expect(service).toBeTruthy();
-    expect(true).toBeTrue();
+    expect(true).toBe(true);
   });
 });

@@ -65,13 +65,13 @@ describe('Integration Testing - Full Component', () => {
   });
 
   
-  it('should create an integrated compoenent', async( done) => {
+  it('should create an integrated compoenent', async( ) => {
       
       //To access HTML element from HTML template, the ComponentFixture provides debugElement and nativeElement.
   
       fixture.whenStable( )
       expect(fixture.debugElement.componentInstance).toBeTruthy();
-      return done()
+      return 
     });
  
 });

@@ -42,7 +42,7 @@ describe('CoursesComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create  check that a list of courses is defined', ( done) => {
+  it('should create  check that a list of courses is defined', ( ) => {
     expect(component).toBeTruthy();
     //To access HTML element from HTML template, the ComponentFixture provides debugElement and nativeElement.
 
@@ -58,6 +58,6 @@ describe('CoursesComponent', () => {
     
     console.log('\n\n\n\nCourse Items', courseItems)
     expect(courseItems).toBeDefined()
-    return done()
+    return 
   });
 });

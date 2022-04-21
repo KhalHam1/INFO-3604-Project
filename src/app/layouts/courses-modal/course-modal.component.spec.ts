@@ -1,5 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,7 +17,7 @@ describe('CourseModalComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientModule, DemoMaterialModule,
-        BrowserAnimationsModule, MatFormFieldModule, MatIconModule
+        BrowserAnimationsModule, MatFormFieldModule, MatIconModule, ReactiveFormsModule
       ],
       declarations: [ CourseModalComponent ],
       providers: [

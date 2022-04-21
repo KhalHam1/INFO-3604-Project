@@ -44,7 +44,7 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', (done) => {
+  it('should create', () => {
     expect(component).toBeTruthy();
     //expect(true).toBeTrue()
 
@@ -59,7 +59,7 @@ describe('LoginComponent', () => {
     // emailInput.value = ''
     // passwordInput.value = ''
     //fixture.componentInstance.submit()
-    done()
+    
     return
   });
 });

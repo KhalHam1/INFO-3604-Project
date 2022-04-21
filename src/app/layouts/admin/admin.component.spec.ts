@@ -16,7 +16,7 @@ import { SpinnerComponent } from 'src/app/shared/spinner.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 
-describe('AdminComponent', () => {
+fdescribe('AdminComponent', () => {
   let component: AdminComponent;
   let fixture: ComponentFixture<AdminComponent>;
 
