@@ -95,12 +95,7 @@
                     <button (click)="end.toggle()" mat-menu-item>
                         <mat-icon>person</mat-icon> Update Account
                     </button>
-                   <!--  <button mat-menu-item>
-                        <mat-icon>account_box</mat-icon> Profile
-                    </button>
-                    <button mat-menu-item>
-                        <mat-icon>notifications_off</mat-icon> Disable notifications
-                    </button> -->
+                   
                     <button mat-menu-item (click)="signOut()" >
                         <mat-icon>exit_to_app</mat-icon> Sign Out
                     </button>
@@ -113,27 +108,6 @@
         <!-- ============================================================== -->
         <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 0 : 0"
             >
-            <!-- ============================================================== -->
-            <!-- Menu within Sidebar - style you can find in sidebar.scss 
-                        [mode]="mobileQuery.matches ? 'side' : 'over'"  --> 
-            <!-- ============================================================== -->
-            <!-- <mat-sidenav #snav mode="over">
-                 <mat-menu >
-                        <button mat-menu-item>
-                            Dashboard
-                        </button>
-                        <button mat-menu-item>
-                            Courses
-                        </button>
-                        <button mat-menu-item>
-                            <span>Notifications </span> 
-                            <span fxFlex></span>
-                            <span class="label label-red"> 10</span>
-                            
-                        </button>
-                    
-                    </mat-menu>
-            </mat-sidenav> -->
 
             <mat-sidenav #snav id="snav" class="pl-xs" mode="over" fixedTopGap="0"
                 [opened]="false" [disableClose]="mobileQuery.matches" (open)="sidebarOpened = true"

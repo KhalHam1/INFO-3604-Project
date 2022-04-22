@@ -20,7 +20,7 @@
 
       <mat-form-field class="full-width" appearance="outline" fxFlex="35">
         <mat-label>Course Name</mat-label>
-        <input placeholder="E.g. Intro to Web" matInput type="text" [(ngModel)]="name" cdkFocusInitial>
+        <input name="courseName" placeholder="E.g. Intro to Web" matInput type="text" [(ngModel)]="name" cdkFocusInitial>
         <button *ngIf="name" matSuffix mat-icon-button aria-label="Clear" (click)="name=''">
         <mat-icon>close</mat-icon>
         </button>
