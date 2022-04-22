@@ -1,5 +1,10 @@
 module.exports = {
-    
+    // server: {
+    //     command: 'ng serve',
+    //     port: 4200,
+    //     launchTimeout: 10000,
+    //     debug: true,
+    //   },
     preset: 'jest-puppeteer',
     setupFilesAfterEnv: ["expect-puppeteer"],
     testMatch: [
@@ -35,12 +40,12 @@ module.exports = {
         "!**/jest/**"
     ],
     coverageDirectory: "coverage/e2e_coverage",
-    // launch: {
-    //     headless: 'false',
-    //     slowMo: 0,
-    //     devtools: true,
-    //     args: ['--headless'],
-    //     args: ['--disable-infobars', '--window-size=1200,800'],
-    // },
+    launch: {
+        headless: 'false',
+        slowMo: 0,
+        devtools: true,
+        args: ['--headless'],
+        args: ['--disable-infobars', '--window-size=1200,800'],
+    },
    // verbose: true
 };

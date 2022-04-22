@@ -13,8 +13,9 @@ describe('Scheduler App', () => {
     
   });
 
-  it('should display welcome message', async() => {
+  it('should have app title of "Scheduler App"', async() => {
     //await page.goto('http://localhost:4200', {waitUntil: 'domcontentloaded'});
+    
     let title = await page.title()
     console.log( "Page Title", title)
     return expect(title).toEqual('Scheduler App');
