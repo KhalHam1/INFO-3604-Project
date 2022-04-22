@@ -491,7 +491,7 @@ export class CalendarComponent implements OnInit {
         
        console.log('Fetched course1: ', course1)
        console.log('Fetched course2: ', course2)
-        if( !match && this.compareCoursePeriod(course1.offeredIn, course2.offeredIn) ){
+        if( !match && (course1.type == "core" || course2.type == "core" ) && this.compareCoursePeriod(course1.offeredIn, course2.offeredIn) ){
           overlaps.push({ 
             title: eventObj.title,
             type: course2.type,
