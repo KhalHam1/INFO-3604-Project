@@ -8,7 +8,7 @@ Coursework Scheduler is a realtime scheduling application that is intend to faci
 3. [Firebase Auth](https://firebase.google.com/docs/auth/web/start) & [Firebase Realtime Database](https://firebase.google.com/docs/database/web/start)
 
 
-# Open in Gitpod [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/KhalHam1/INFO-3604-Project/tree/testingBranch)
+# Open in Gitpod [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/KhalHam1/INFO-3604-Project/)
 to use a branch, add "/tree/branchName" to the end of the github link in the image ☝️
 
 ## Development server
