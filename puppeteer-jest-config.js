@@ -41,7 +41,7 @@ module.exports = {
     ],
     coverageDirectory: "coverage/e2e_coverage",
     testTimeout: 25000,
-    slowMo: 100,
+    //slowMo: 100,
     // launch: {
     //     headless: 'false',
     //     slowMo: 0,

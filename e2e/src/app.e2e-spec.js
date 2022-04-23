@@ -4,6 +4,8 @@
 const puppeteerJestConfig = require("../../puppeteer-jest-config");
 
 
+//                                                            TEST CASES WITH ".SKIP" ARE A WORK IN PROGRESS
+
 async function login(){
   if (page.url().includes('login') == false ) return 
   
@@ -143,9 +145,10 @@ describe('Scheduler App', () => {
       
     })
 
+  })
 
     describe('Calendar Page', ()=>{
-      it('3. should Schedule event on calendar page', async()=>{
+      it.skip('3. should Schedule event on calendar page', async()=>{
         //await page.goto(puppeteerJestConfig.globals.URL , {waitUntil: "load"})
 
         // await login()
@@ -188,7 +191,7 @@ describe('Scheduler App', () => {
         
       })
 
-      it('4. should recieve an event clash on event schedule', async()=>{
+      it.skip('4. should recieve an event clash on event schedule', async()=>{
 
       })
   
@@ -306,10 +309,210 @@ describe('Scheduler App', () => {
     })
 
 
-    //describe( 'Degree', ()=>{})
+    describe( 'Programme Page', ()=>{
+
+      it('7. should display a list of degrees ', async () => {
+        await login()
+
+        let url = page.url()
+
+        //open side nav
+        await page.waitForSelector('#main-nav-bar > .w-100 > #menuButton ')
+        await page.click('#main-nav-bar > .w-100 > #menuButton')
+
+        //Click programmes button
+        await page.waitForSelector('.mat-nav-list > #programmeLink > .mat-list-item > .mat-list-item-content > .mat-card')
+        await page.click('.mat-nav-list > #programmeLink > .mat-list-item > .mat-list-item-content > .mat-card')
+
+        url = page.url()
+
+        expect(url).toBe(puppeteerJestConfig.globals.URL + 'views/programmes')
+
+        await page.waitForSelector('.side > .mat-selection-list > .mat-list-item:nth-child(1) > .mat-list-item-content > .mat-list-text')
+        let degreeList = await page.$$('.side > .mat-selection-list > .mat-list-item:nth-child(1) > .mat-list-item-content > .mat-list-text')
+
+        expect(degreeList.length).toBeGreaterThan(0)
+      })
+
+      it.skip('8. should Edit degree information (not fully implemented', async()=>{
+        await login()
+        let url =  page.url()
+        //console.log('Test 6',  url)
+        
+        //open side nav
+        //open side nav
+        await page.waitForSelector('#main-nav-bar > .w-100 > #menuButton ')
+        await page.click('#main-nav-bar > .w-100 > #menuButton')
+
+        //click 'Programme' button
+        await page.waitForSelector('.mat-nav-list > a:nth-child(3) > .mat-list-item ')
+        await page.$eval('.mat-nav-list > a:nth-child(3)', el => el.click() )
+
+        
+        url =  page.url()
+        //check current page is Programme page
+        expect( url).toBe( puppeteerJestConfig.globals.URL + 'views/programmes')
+
+
+        //select first degree
+        await page.waitForSelector('.side > .mat-selection-list > .mat-list-item:nth-child(1) > .mat-list-item-content > .mat-list-text')
+        await page.click('.side > .mat-selection-list > .mat-list-item:nth-child(1) > .mat-list-item-content > .mat-list-text')
+
+        //check for degree details (name) to be displayed
+        await page.waitForSelector('#degreeName')
+        
+        await page.waitForSelector('#degreeName')
+        let degreeNameHTML = await page.$('#degreeName')
+        let degreeName = await page.evaluate(degreeNameHTML => degreeNameHTML.innerHTML , degreeNameHTML)
+
+        expect(degreeName).toBeDefined()
+
+        //get # of rows in table
+        await page.waitForSelector('table > tr')
+        let courseList = await page.$$('table > tr')
+
+        expect(courseList.length).toBeGreaterThan(0)
+
+        //click pencil icon
+        await page.waitForSelector('.ng-star-inserted > tr > th > .headings > .mat-icon:nth-child(1)')
+        await page.click('.ng-star-inserted > tr > th > .headings > .mat-icon:nth-child(1)')
+
+        //wait for overlay
+        await page.waitForSelector('.cdk-overlay-container')
+
+        //select first course option
+        await page.waitForSelector('.mat-form-field-wrapper > .mat-form-field-flex > .mat-form-field-infix > #mat-select-22 > .mat-select-trigger')
+        await page.click('.mat-form-field-wrapper > .mat-form-field-flex > .mat-form-field-infix > #mat-select-22 > .mat-select-trigger')
+
+        await page.waitForSelector('#cdk-overlay-13 > .mat-select-panel-wrap > #mat-select-22-panel > #mat-option-69 > .mat-option-text')
+        await page.click('#cdk-overlay-13 > .mat-select-panel-wrap > #mat-select-22-panel > #mat-option-69 > .mat-option-text')
+
+        //select period
+        await page.waitForSelector('.mat-form-field-flex > .mat-form-field-infix > #mat-select-26 > .mat-select-trigger > .mat-select-arrow-wrapper')
+        await page.click('.mat-form-field-flex > .mat-form-field-infix > #mat-select-26 > .mat-select-trigger > .mat-select-arrow-wrapper')
+
+        await page.waitForSelector('#cdk-overlay-14 > .mat-select-panel-wrap > #mat-select-26-panel > #mat-option-77 > .mat-option-text')
+        await page.click('#cdk-overlay-14 > .mat-select-panel-wrap > #mat-select-26-panel > #mat-option-77 > .mat-option-text')
+
+
+        //clcik save button
+        await page.waitForSelector('#cdk-overlay-12 > #mat-dialog-5 > .ng-star-inserted > .mat-dialog-actions > button:nth-child(1)')
+        await page.click('#cdk-overlay-12 > #mat-dialog-5 > .ng-star-inserted > .mat-dialog-actions > button:nth-child(1)')
+        
+        //check details is for same degree
+        await page.waitForSelector('#degreeName')
+        let degreeName2HTML = await page.$('#degreeName')
+        let degreeName2 = await page.evaluate(degreeName2HTML => degreeName2HTML.innerHTML , degreeName2HTML)
+
+        expect(degreeName).toBe(degreeName2)
+        //current new # of course in table
+        await page.waitForSelector('table > tr')
+        let courseList2 = await page.$$('table > tr')
+
+        expect(courseList2.length).toBeGreaterThan(courseList)
+        //click pencil icon & wait for modal to open
+        //wait for modal to close and course name reappears
+      })
+    })
+
 
     
-    })
+    describe.skip('Admin Page', () => {
+
+      it('10. should display a list of current users', async () => {
+        await login()
+
+        //open side nav
+        await page.waitForSelector('#main-nav-bar > .w-100 > .sidebar-toggle > .mat-button-wrapper > .mat-icon')
+        await page.click('#main-nav-bar > .w-100 > .sidebar-toggle > .mat-button-wrapper > .mat-icon')
+
+        //Click on Admin Dashboard button
+        await page.waitForSelector('.mat-nav-list > .ng-star-inserted > .mat-list-item > .mat-list-item-content > .mat-card')
+        await page.click('.mat-nav-list > .ng-star-inserted > .mat-list-item > .mat-list-item-content > .mat-card')
+        
+        url = page.url()
+        //check current page is admin page
+        expect(page.url()).toBe(puppeteerJestConfig.globals.URL + 'views/admin')
+
+        //Get number of users on table
+        await page.waitForSelector('.main > .mat-table > tbody > .mat-row:nth-child(1) > .mat-cell:nth-child(2)')
+        let userList = await page.$$('.main > .mat-table > tbody > .mat-row:nth-child(1) > .mat-cell:nth-child(2)')
+
+        expect(userList.length).toBeGreaterThan(0)
+
+      })
+
+
+      it('11. should create a user', async () => {
+        await login()
+
+        //open side nav
+        await page.waitForSelector('#main-nav-bar > .w-100 > .sidebar-toggle > .mat-button-wrapper > .mat-icon')
+        await page.click('#main-nav-bar > .w-100 > .sidebar-toggle > .mat-button-wrapper > .mat-icon')
+
+        //Click on Admin Dashboard button
+        await page.waitForSelector('.mat-nav-list > .ng-star-inserted > .mat-list-item > .mat-list-item-content > .mat-card')
+        await page.click('.mat-nav-list > .ng-star-inserted > .mat-list-item > .mat-list-item-content > .mat-card')
+        
+        url = page.url()
+
+        //check current page is admin page
+        expect(page.url()).toBe(puppeteerJestConfig.globals.URL + 'views/admin')
+
+
+        //Check list bfore.
+        await page.waitForSelector('.main > .mat-table > tbody > .mat-row:nth-child(1) > .mat-cell:nth-child(2)')
+        let userList1 = await page.$$('.main > .mat-table > tbody > .mat-row:nth-child(1) > .mat-cell:nth-child(2)')
+
+        await page.waitForSelector('.page-content > .ng-star-inserted > .main > .sub_header > .button1')
+        await page.click('.page-content > .ng-star-inserted > .main > .sub_header > .button1')
+
+         //Enter name
+         await page.waitForSelector('input[id="createName"]')
+         await page.click('input[id="createName"]')
+         await page.keyboard.type("autoTestName")
+
+         //Enter email
+         await page.waitForSelector('input[id="createEmail"]')
+         await page.click('input[id="createEmail"]')
+         await page.keyboard.type("autoTestemail@gmail.com")
+
+         //Enter password
+         await page.waitForSelector('input[id="createPassword"]')
+         await page.click('input[id="createPassword"]')
+         await page.keyboard.type("password")
+         
+         //Renter password
+         await page.waitForSelector('input[id="createMatchPw"]')
+         await page.click('input[id="createMatchPw"]')
+         await page.keyboard.type("password")
+
+         await page.waitForSelector('.ng-star-inserted > .main > #signUpForm > .ng-pristine > .button')
+         await page.click('.ng-star-inserted > .main > #signUpForm > .ng-pristine > .button')
+
+         //open side nav
+          await page.waitForSelector('#main-nav-bar > .w-100 > .sidebar-toggle > .mat-button-wrapper > .mat-icon')
+          await page.click('#main-nav-bar > .w-100 > .sidebar-toggle > .mat-button-wrapper > .mat-icon')
+
+          //Click on Admin Dashboard button
+          await page.waitForSelector('.mat-nav-list > .ng-star-inserted > .mat-list-item > .mat-list-item-content > .mat-card')
+          await page.click('.mat-nav-list > .ng-star-inserted > .mat-list-item > .mat-list-item-content > .mat-card')
+          
+          url = page.url()
+
+          //check current page is admin page
+          expect(page.url()).toBe(puppeteerJestConfig.globals.URL + 'views/admin')
+
+          await page.waitForSelector('.main > .mat-table > tbody > .mat-row:nth-child(1) > .mat-cell:nth-child(2)')
+          let userList2 = await page.$$('.main > .mat-table > tbody > .mat-row:nth-child(1) > .mat-cell:nth-child(2)')
+        
+          expect(userList2.length).toBeGreaterThan(userList1.length)
+
+        })
+
+      })
+    
+    
 
   afterEach( () => async () => {
     await logout()
