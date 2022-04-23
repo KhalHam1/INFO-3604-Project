@@ -6,7 +6,6 @@ import {
 	OnDestroy,
 	OnInit
 } from '@angular/core';
-import { MenuItems } from '../../shared/menu-items/menu-items';
 
 
 import { PerfectScrollbarConfigInterface, PerfectScrollbarDirective } from 'ngx-perfect-scrollbar';
@@ -171,21 +170,9 @@ export class FullComponent implements OnDestroy {
 	unreadNotifications: boolean = false; 
 	notifications: any = [] ;
 
-	mobileQuery: MediaQueryList;
-
-	dir = 'ltr';
-	dark = false;
-	minisidebar = false;
-	boxed = false;
-	horizontal = false;
-
-	green = false;
-	blue = false;
-	danger = false;
-	showHide = false; 
-	url = '';
 	sidebarOpened = false;
-	status = false;
+
+	mobileQuery: MediaQueryList;
 
 	public showSearch = false;
 	public config: PerfectScrollbarConfigInterface = {};
@@ -197,7 +184,6 @@ export class FullComponent implements OnDestroy {
 		public router: Router,
 		changeDetectorRef: ChangeDetectorRef,
 		media: MediaMatcher,
-		public menuItems: MenuItems,
 		private auth: AuthenticationService,
 		private firebase: FirebaseDBServiceService,
 		private toast: HotToastService 
@@ -207,23 +193,12 @@ export class FullComponent implements OnDestroy {
 		this._mobileQueryListener = () => changeDetectorRef.detectChanges();
 		// tslint:disable-next-line: deprecation
 		this.mobileQuery.addListener(this._mobileQueryListener);
-		// this is for dark theme
-		// const body = document.getElementsByTagName('body')[0];
-		// body.classList.toggle('dark');
-		this.dark = false;
+		
 
 		if (this.auth.loggedIn){
 			this.currentUser = this.auth.currentUser?.uid 
 			this.newEmail = this.auth.currentUser?.email || ''
-			//check if the current user is an admin
-			//this.isAdmin = this.auth.isAdmin
-			// this.firebase.isAdmin(this.currentUser).subscribe((response)=>{
-			// 	if(response.result)
-			// 		this.isAdmin = response.result
-			// 	// else if(response.error)
-			// 	// 	console.log(response.error)
-			// })
-			// console.log(this.currentUser)
+			
 		}
 		else{
 			this.router.navigate(['login']);
@@ -270,23 +245,8 @@ export class FullComponent implements OnDestroy {
 
 		
 	}
-
-	clickEvent(): void {
-		 this.status = !this.status;
-	}
-
-	darkClick() {
-		// const body = document.getElementsByTagName('body')[0];
-		// this.dark = this.dark;
-		const body = document.getElementsByTagName('body')[0];
-		body.classList.toggle('dark');
-		// if (this.dark)
-		// else
-		// 	body.classList.remove('dark');
-		// this.dark = this.dark;
-		// body.classList.toggle('dark');
-		// this.dark = this.dark;
-	}
+	
+	
 
 	signOut(){
 		this.auth.logout().subscribe(()=>{

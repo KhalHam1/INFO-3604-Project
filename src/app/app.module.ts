@@ -11,17 +11,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FullComponent } from './layouts/full/full.component';
 import {  CalendarModal } from './layouts/calendarModal/calendarModal.component';
 
-import { VerticalAppHeaderComponent } from './layouts/full/vertical-header/vertical-header.component';
-import { VerticalAppSidebarComponent } from './layouts/full/vertical-sidebar/vertical-sidebar.component';
-import { HorizontalAppHeaderComponent } from './layouts/full/horizontal-header/horizontal-header.component';
-import { HorizontalAppSidebarComponent } from './layouts/full/horizontal-sidebar/horizontal-sidebar.component';
 
-import { AppBreadcrumbComponent } from './layouts/full/breadcrumb/breadcrumb.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DemoMaterialModule } from './demo-material-module';
 
 
-import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
@@ -62,13 +56,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   declarations: [
     AppComponent,
     FullComponent,
-    VerticalAppHeaderComponent,
     SpinnerComponent,
     CalendarModal,
-    VerticalAppSidebarComponent,
-    AppBreadcrumbComponent,
-    HorizontalAppHeaderComponent,
-    HorizontalAppSidebarComponent,
     PromptDialogComponent,
     LoginComponent,
     ProgrammeComponent,
@@ -85,7 +74,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FlexLayoutModule,
     PerfectScrollbarModule,
     HttpClientModule,
-    SharedModule,
     RouterModule.forRoot(AppRoutes),
 
     TranslateModule.forRoot({

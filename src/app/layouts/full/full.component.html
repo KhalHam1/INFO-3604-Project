@@ -1,7 +1,7 @@
 <!-- ============================================================== -->
 <!-- Main wrapper - style you can find in pages.scss -->
 <!-- ============================================================== -->
-<div class="main-container" [ngClass]="{'minisidebar': minisidebar, 'boxed': boxed, 'danger': danger, 'blue': blue, 'green': green, 'horizontal' : horizontal }">
+<div class="main-container" >
 
         <!-- ============================================================== -->
         <!-- Topbar - style you can find in header.scss -->
@@ -35,13 +35,7 @@
                 <!-- ============================================================== -->
                 <!-- app header component - style you can find in header.scss / header.component.ts-->
                 <!-- ============================================================== -->
-                <!-- <div *ngIf="!horizontal else horizontalheader">
-                    <app-vertical-header></app-vertical-header>
-                </div>
-
-                <ng-template #horizontalheader>
-                    <app-horizontal-header></app-horizontal-header>
-                </ng-template> -->
+                
 
                 <!-- ============================================================== -->
                 <!-- Right sidebar toggle - style you can find in rightsidebar.component.scss -->
@@ -123,9 +117,7 @@
                      <a routerLink="/views/courses" (click)="snav.toggle()" id="courseLink"> <mat-list-item>
                        <mat-card>
                             Courses
-                            <!-- <span>Courses </span> 
-                            <span fxFlex></span>
-                            <span class="label label-red"> 10</span> -->
+                            
                         </mat-card>
                     </mat-list-item></a>
                     <a *ngIf="isAdmin" routerLink="/views/admin" (click)="snav.toggle()" id="adminLink"> <mat-list-item  >
@@ -134,11 +126,7 @@
                     
                 
                 </mat-nav-list>
-                <!-- <perfect-scrollbar class="scbar" [config]="config">
-                    <app-vertical-sidebar class="app-sidebar" (notify)="snav.toggle()">
-                    </app-vertical-sidebar>
-                   
-                </perfect-scrollbar> -->
+                
 
                 
 
@@ -190,52 +178,7 @@
                         <button mat-button (click)="profile_side_nav.toggle()"  id="cancel_button"> <mat-icon matPrefix>arrow_back</mat-icon> Back </button>
                     </div>
                     
-                    <!-- <mat-nav-list>
-
-                        <h3 mat-subheader class="text-uppercase font-weight-bold">Account </h3>
-                        <mat-list-item *ngIf="!minisidebar">
-                            <mat-slide-toggle color="warn" [(ngModel)]="horizontal">
-                                Horizontal Layout</mat-slide-toggle>
-                        </mat-list-item>
-                        
-                        <mat-list-item>
-                            <mat-slide-toggle color="warn" [(ngModel)]="boxed">Boxed Layout</mat-slide-toggle>
-                        </mat-list-item>
-                        <mat-list-item *ngIf="!horizontal">
-                            <mat-slide-toggle [(ngModel)]="minisidebar">Mini Sidebar</mat-slide-toggle>
-                        </mat-list-item>
-                        <mat-divider></mat-divider>
-
-                        <h3 mat-subheader class="text-uppercase font-weight-bold">Colors</h3>
-
-                        <mat-list-item>
-                            <mat-checkbox color="warn" [(ngModel)]="danger" (change)="green = blue = false"
-                                class="text-danger">Red
-                            </mat-checkbox>
-                        </mat-list-item>
-
-                        <mat-list-item>
-                            <mat-checkbox color="warn" [(ngModel)]="green" (change)="danger = blue = false"
-                                class="text-megna">Teal
-                                Green</mat-checkbox>
-                        </mat-list-item>
-
-                        <mat-list-item>
-                            <mat-checkbox color="warn" [(ngModel)]="blue" (change)="green = danger = false"
-                                class="text-info">Blue
-                            </mat-checkbox>
-                        </mat-list-item>
-
-                        <mat-list-item>
-                            
-                            <mat-slide-toggle color="warn" [(ngModel)]="dark" (change)="darkClick()"> Dark
-                            </mat-slide-toggle>
-                            
-                            
-                            <mat-checkbox color="warn" [(ngModel)]="dark" (change)="green = blue = danger = false">Dark</mat-checkbox> 
-
-                        </mat-list-item>
-                    </mat-nav-list> -->
+                   
                 </div>
             </mat-sidenav>
 
@@ -244,7 +187,7 @@
             <!-- ============================================================== -->
             <mat-sidenav-content>
 
-                <!-- <app-breadcrumb></app-breadcrumb> -->
+                
                 <div class="page-content">
                     <router-outlet>
                         <app-spinner></app-spinner>
