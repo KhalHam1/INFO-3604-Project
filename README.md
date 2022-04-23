@@ -1,6 +1,6 @@
 # Coursework Scheduler
 ![Scheduler Image](./src/assets/images/app.jpeg)
-Coursework Scheduler is a realtime scheduling application that is intend to facilitate simultaneous scheduling of student assessments while helping lecturers to visual students current workloads utilizing an interactive calendar with various views.
+Coursework Scheduler is a realtime scheduling application that is intend to facilitate simultaneous scheduling of student assessments while helping lecturers to visual students current workloads utilizing an interactive calendar with various views. [Deployed Link](https://scheduler-authentication.web.app/)
 
 ### Technologies used are:
 1. [Angular Framework](https://angular.io/)
