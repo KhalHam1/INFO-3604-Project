@@ -5,28 +5,28 @@ const puppeteerJestConfig = require("../../puppeteer-jest-config");
 
 
 async function login(){
+  if (page.url().includes('login') == false ) return 
   
   //Get email htmlElement & type 'test@gmail.com on click
   await page.waitForSelector('#email')
   await page.click('#email')
   await page.keyboard.type('test@gmail.com')
-  const emailHandle = await page.$('#email');
-  const email = await page.evaluate(emailHandle => emailHandle.value, emailHandle);
   
   //Get password htmlElement & type password on click
   await page.waitForSelector('#password')
   await page.click('#password')
   await page.keyboard.type('password')
-  const passwordHandle = await page.$('#password');
-  const password = await page.evaluate(emailHandle => emailHandle.value, passwordHandle);
 
 
   await page.waitForSelector('#login-button')
   await page.click('#login-button')
+  
 
 }
 
 async function logout(){
+  if (page.url().includes('login') == false ) return 
+
   await page.waitForSelector('#account_icon')
   await page.click('#account_icon')
 
@@ -38,8 +38,9 @@ describe('Scheduler App', () => {
  
   beforeEach( async() => {
     
-    
-    await page.goto(puppeteerJestConfig.globals.URL, {waitUntil: 'domcontentloaded'});
+    if ( page.isClosed())
+      browser.newPage()
+    await page.goto(puppeteerJestConfig.globals.URL + 'login', {waitUntil: 'networkidle0'});
     
   });
 
@@ -93,7 +94,7 @@ describe('Scheduler App', () => {
       // expect(toastText).toBe('error')
 
       //check if the currentnURL is the same as the first
-      expect( page.url() ).toBe( firstURL + 'login')
+      expect( page.url() ).toBe( firstURL )
       
       
     })
@@ -198,17 +199,27 @@ describe('Scheduler App', () => {
       it('5. should display a list of courses ', async()=>{
         await login()
 
-        //open side nav
-        await page.waitForSelector('#main-nav-bar > .w-100 > .sidebar-toggle > .mat-button-wrapper > .mat-icon')
-        await page.click('#main-nav-bar > .w-100 > .sidebar-toggle > .mat-button-wrapper > .mat-icon')
+        let url = await page.url()
+        //console.log('Test 5',  url)
 
+        //open side nav
+        await page.waitForSelector('#main-nav-bar > .w-100 > #menuButton ')
+        await page.click('#main-nav-bar > .w-100 > #menuButton')
+
+        //console.log('Test 5 - check 1')
         //click 'Course' button
         await page.waitForSelector('.mat-nav-list > a:nth-child(4) > .mat-list-item ')
         await page.$eval('.mat-nav-list > a:nth-child(4)', el => el.click() )
 
+        //console.log('Test 5 - check 2')
+        //await page.waitForNavigation()
+        url = await page.url()
+        //console.log('Test 5 - check 3')
+        
         //check current page is Course page
-        expect(page.url() ).toBe( puppeteerJestConfig.globals.URL + 'views/courses')
+        expect( url ).toBe( puppeteerJestConfig.globals.URL + 'views/courses')
 
+        //console.log('Test 5 - check 4')
         //get list of items in course page
         await page.waitForSelector('.side > .mat-selection-list > .mat-list-item:nth-child(1) > .mat-list-item-content > .mat-list-text')
         let courseList = await page.$$('.side > .mat-selection-list > .mat-list-item:nth-child(1) > .mat-list-item-content > .mat-list-text')
@@ -219,23 +230,31 @@ describe('Scheduler App', () => {
 
 
       it( '6. should be able to Edit course information', async()=>{
-        await login()
 
+        
+        await login()
+        let url =  page.url()
+        //console.log('Test 6',  url)
+        
         //open side nav
-        await page.waitForSelector('#main-nav-bar > .w-100 > .sidebar-toggle > .mat-button-wrapper > .mat-icon')
-        await page.click('#main-nav-bar > .w-100 > .sidebar-toggle > .mat-button-wrapper > .mat-icon')
+        //open side nav
+        await page.waitForSelector('#main-nav-bar > .w-100 > #menuButton ')
+        await page.click('#main-nav-bar > .w-100 > #menuButton')
 
         //click 'Course' button
         await page.waitForSelector('.mat-nav-list > a:nth-child(4) > .mat-list-item ')
         await page.$eval('.mat-nav-list > a:nth-child(4)', el => el.click() )
 
+        
+        url =  page.url()
         //check current page is Course page
-        expect(page.url() ).toBe( puppeteerJestConfig.globals.URL + 'views/courses')
+        expect( url).toBe( puppeteerJestConfig.globals.URL + 'views/courses')
 
         //click first item
         await page.waitForSelector('.side > .mat-selection-list > .mat-list-item:nth-child(1) > .mat-list-item-content > .mat-list-text')
         await page.click('.side > .mat-selection-list > .mat-list-item:nth-child(1) ')
 
+        //console.log('CHECK 1')
 
         //check for course name 
         await page.waitForSelector('.container > main > .ng-star-inserted > tr:nth-child(2) > td')
@@ -244,6 +263,7 @@ describe('Scheduler App', () => {
 
         expect(courseName).toBeDefined()
 
+        //console.log('CHECK 2')
         //click pencil icon to edit
         await page.waitForSelector('.ng-star-inserted > tr > th > .headingIcon > .mat-icon:nth-child(1)')
         await page.click('.ng-star-inserted > tr > th > .headingIcon > .mat-icon:nth-child(1)')
@@ -285,11 +305,17 @@ describe('Scheduler App', () => {
 
     })
 
+
+    //describe( 'Degree', ()=>{})
+
     
-  })
+    })
 
   afterEach( () => async () => {
     await logout()
-    return await browser.close();
+    return page.close()
   });
+
+  
+  
 });
