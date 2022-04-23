@@ -40,12 +40,14 @@ module.exports = {
         "!**/jest/**"
     ],
     coverageDirectory: "coverage/e2e_coverage",
-    launch: {
-        headless: 'false',
-        slowMo: 0,
-        devtools: true,
-        args: ['--headless'],
-        args: ['--disable-infobars', '--window-size=1200,800'],
-    },
-   // verbose: true
+    testTimeout: 25000,
+    slowMo: 100,
+    // launch: {
+    //     headless: 'false',
+    //     slowMo: 0,
+    //     devtools: true,
+        
+    //     args: ['--disable-infobars', '--window-size=1200,800'],
+    // },
+   verbose: true
 };
